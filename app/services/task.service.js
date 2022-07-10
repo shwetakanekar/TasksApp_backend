@@ -17,3 +17,10 @@ exports.getTask = async (id) => {
   });
   return task;
 };
+
+exports.editTask = async (id, taskData) => {
+  const updatedTaskCount = await Task.update(taskData, {
+    where: { id },
+  });
+  return updatedTaskCount;
+};

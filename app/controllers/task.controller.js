@@ -56,3 +56,34 @@ exports.getTask = async (req, res) => {
     });
   }
 };
+
+exports.editTask = async (req, res) => {
+  const { id } = req.params;
+  const { title, description, status } = req.body;
+
+  if (!title || !description || status == null) {
+    return res.status(400).send({
+      message: 'Parameters in request body are missing.',
+    });
+  }
+
+  const taskData = { title, description, status };
+
+  try {
+    const updatedTaskCount = await taskService.editTask(id, taskData);
+
+    if (updatedTaskCount[0]) {
+      return res.status(200).send({
+        message: 'Task was updated.',
+      });
+    }
+    return res.status(404).send({
+      message: 'Task not found.',
+    });
+  } catch (e) {
+    console.log(`ERROR: ${e.message}`);
+    return res.status(500).send({
+      message: 'Error occurred while updating task.',
+    });
+  }
+};

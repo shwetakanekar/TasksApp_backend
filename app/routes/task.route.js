@@ -9,4 +9,6 @@ module.exports = (app) => {
   router.get('/', taskController.getAllTasks);
 
   router.get('/:id', taskController.getTask);
+
+  router.put('/:id', taskController.editTask);
 };
