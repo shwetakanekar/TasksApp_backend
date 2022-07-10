@@ -4,7 +4,7 @@ const cors = require('cors');
 const db = require('./app/models');
 
 const app = express();
-console.log(process.env);
+
 var corsOptions = {
   origin: 'http://localhost:8081',
 };
@@ -29,6 +29,8 @@ db.sequelize
 app.get('/', (req, res) => {
   res.json({ message: 'Welcome to Tasks API.' });
 });
+
+require('./app/routes/task.route')(app);
 
 // set port to listen for requests
 const PORT = process.env.PORT || 8000;
