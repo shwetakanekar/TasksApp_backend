@@ -3,5 +3,8 @@ module.exports = (app) => {
   const router = require('express').Router();
 
   app.use('/api/tasks', router);
+
   router.post('/', taskController.createTask);
+
+  router.get('/', taskController.getAllTasks);
 };

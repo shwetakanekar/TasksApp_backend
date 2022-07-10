@@ -25,3 +25,15 @@ exports.createTask = async (req, res) => {
     });
   }
 };
+
+exports.getAllTasks = async (req, res) => {
+  try {
+    const tasks = await taskService.getAllTasks();
+    return res.status(200).send({ tasks });
+  } catch (e) {
+    console.log(`ERROR: ${e.message}`);
+    return res.status(500).send({
+      message: 'Error occurred while fetching tasks.',
+    });
+  }
+};
