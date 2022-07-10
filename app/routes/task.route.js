@@ -7,4 +7,6 @@ module.exports = (app) => {
   router.post('/', taskController.createTask);
 
   router.get('/', taskController.getAllTasks);
+
+  router.get('/:id', taskController.getTask);
 };

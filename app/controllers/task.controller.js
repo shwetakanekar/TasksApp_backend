@@ -37,3 +37,22 @@ exports.getAllTasks = async (req, res) => {
     });
   }
 };
+
+exports.getTask = async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    const task = await taskService.getTask(id);
+    if (task) {
+      return res.status(200).send({ task });
+    }
+    return res.status(404).send({
+      message: 'Task not found.',
+    });
+  } catch (e) {
+    console.log(`ERROR: ${e.message}`);
+    return res.status(500).send({
+      message: 'Error occurred while fetching task.',
+    });
+  }
+};

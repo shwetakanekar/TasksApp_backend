@@ -10,3 +10,10 @@ exports.getAllTasks = async () => {
   const tasks = await Task.findAll();
   return tasks;
 };
+
+exports.getTask = async (id) => {
+  const task = await Task.findOne({
+    where: { id },
+  });
+  return task;
+};
