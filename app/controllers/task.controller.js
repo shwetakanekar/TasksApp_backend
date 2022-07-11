@@ -22,6 +22,7 @@ exports.createTask = async (req, res) => {
     console.log(`ERROR: ${e.message}`);
     return res.status(500).send({
       message: 'Error occurred while creating task.',
+      error: e.message,
     });
   }
 };
@@ -34,6 +35,7 @@ exports.getAllTasks = async (req, res) => {
     console.log(`ERROR: ${e.message}`);
     return res.status(500).send({
       message: 'Error occurred while fetching tasks.',
+      error: e.message,
     });
   }
 };
@@ -53,6 +55,7 @@ exports.getTask = async (req, res) => {
     console.log(`ERROR: ${e.message}`);
     return res.status(500).send({
       message: 'Error occurred while fetching task.',
+      error: e.message,
     });
   }
 };
@@ -84,6 +87,29 @@ exports.editTask = async (req, res) => {
     console.log(`ERROR: ${e.message}`);
     return res.status(500).send({
       message: 'Error occurred while updating task.',
+      error: e.message,
+    });
+  }
+};
+
+exports.deleteTask = async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    const deletedTaskCount = await taskService.deleteTask(id);
+    if (deletedTaskCount) {
+      return res.status(200).send({
+        message: 'Task was deleted.',
+      });
+    }
+    return res.status(404).send({
+      message: 'Task not found.',
+    });
+  } catch (e) {
+    console.log(`ERROR: ${e.message}`);
+    return res.status(500).send({
+      message: 'Error occurred while deleting task.',
+      error: e.message,
     });
   }
 };

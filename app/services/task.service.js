@@ -24,3 +24,10 @@ exports.editTask = async (id, taskData) => {
   });
   return updatedTaskCount;
 };
+
+exports.deleteTask = async (id) => {
+  const deletedTaskCount = await Task.destroy({
+    where: { id },
+  });
+  return deletedTaskCount;
+};
