@@ -1,33 +1,21 @@
 const db = require('../models');
 const Task = db.task;
 
-exports.createTask = async (taskData) => {
-  const task = await Task.create(taskData);
-  return task;
-};
+exports.createTask = async (taskData) => await Task.create(taskData);
 
-exports.getAllTasks = async () => {
-  const tasks = await Task.findAll();
-  return tasks;
-};
+exports.getAllTasks = async () => await Task.findAll();
 
-exports.getTask = async (id) => {
-  const task = await Task.findOne({
+exports.getTask = async (id) =>
+  await Task.findOne({
     where: { id },
   });
-  return task;
-};
 
-exports.editTask = async (id, taskData) => {
-  const updatedTaskCount = await Task.update(taskData, {
+exports.editTask = async (id, taskData) =>
+  await Task.update(taskData, {
     where: { id },
   });
-  return updatedTaskCount;
-};
 
-exports.deleteTask = async (id) => {
-  const deletedTaskCount = await Task.destroy({
+exports.deleteTask = async (id) =>
+  await Task.destroy({
     where: { id },
   });
-  return deletedTaskCount;
-};
